@@ -4,32 +4,46 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Vector3 moveDir;
+    private Rigidbody2D _rb2D;
+
+    private bool _moving;
+    private float _movingSpeed = 2.5f;
+    private float _turningDir;
+    private float _turningSpeed = 1f;
+
+    void Awake()
+    {
+        _rb2D = GetComponent<Rigidbody2D>();
+    }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
+        _moving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            moveDir = new Vector3(0, 1, 0);
+            _turningDir = 1f;
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            moveDir = new Vector3(0, -1, 0);
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            moveDir = new Vector3(-1, 0, 0);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            moveDir = new Vector3(1, 0, 0);
+            _turningDir = -1f;
         }
         else
         {
-            moveDir = Vector3.zero;
+            _turningDir = 0f;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (_moving)
+        {
+            _rb2D.AddForce(transform.up * _movingSpeed);
         }
 
-        float moveSpeed = 3 * Time.deltaTime;
-        transform.position += moveSpeed * moveDir;
+        if (_turningDir != 0)
+        {
+            _rb2D.AddTorque(_turningDir * _turningSpeed);
+        }
     }
 }
