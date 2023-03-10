@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 787317678}
   - component: {fileID: 787317679}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: AsteroidSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
