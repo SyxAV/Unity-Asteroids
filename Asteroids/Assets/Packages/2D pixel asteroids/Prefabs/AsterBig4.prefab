@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 902199544028026708}
   - component: {fileID: 3886608385971367320}
   - component: {fileID: 7877735535130763336}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AsterBig4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4269747921514884413}
   - component: {fileID: 6225120039319007050}
   - component: {fileID: -3114949022145778418}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AsterBig1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910cfe36919844242a85920432606a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb2D: {fileID: -3114949022145778418}
 --- !u!50 &-3114949022145778418
 Rigidbody2D:
   serializedVersion: 4
