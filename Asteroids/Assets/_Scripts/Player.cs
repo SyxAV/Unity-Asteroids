@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Rigidbody2D _rb2D;
+    [SerializeField] private Transform _gunBarrel;
+    [SerializeField] private Bullet _bullet;
 
+    private Rigidbody2D _rb2D;
     private bool _moving;
     private float _movingSpeed = 2.5f;
     private float _turningDir;
@@ -32,6 +34,17 @@ public class Player : MonoBehaviour
         {
             _turningDir = 0f;
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Shoot();
+        }
+    }
+
+    private void Shoot()
+    {
+        var bullet = Instantiate(_bullet, _gunBarrel.position, Quaternion.identity);
+        bullet.SetDirection(transform.up);
     }
 
     void FixedUpdate()
