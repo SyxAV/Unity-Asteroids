@@ -5,9 +5,9 @@ using UnityEngine;
 public class Asteroid : MonoBehaviour
 {
     private Rigidbody2D _rb2D;
-    private float speed = 10f;
+    private float speed = 7f;
 
-    void Start()
+    void Awake()
     {
         _rb2D = GetComponent<Rigidbody2D>();
     }

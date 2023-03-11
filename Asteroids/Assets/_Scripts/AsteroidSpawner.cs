@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour
 {
-    [SerializeField] private Asteroid _asteroidPrefab;
+    [SerializeField] private Asteroid[] _asteroidPrefab;
 
     private float _spawnTime = 2f;
     private float _spawnDistance = 15f;
@@ -17,15 +17,13 @@ public class AsteroidSpawner : MonoBehaviour
 
     private void SpawnAsteroid()
     {
-        //int asteroidIndex = Random.Range(0, _asteroidPrefab.Length);
+        int asteroidIndex = Random.Range(0, _asteroidPrefab.Length);
         Vector3 spawnDir = Random.insideUnitCircle.normalized * _spawnDistance;
         Vector3 spawnPos = transform.position + spawnDir;
         float variance = Random.Range(-_trajectoryVariance, _trajectoryVariance);
         Quaternion rotation = Quaternion.AngleAxis(variance, Vector3.forward);
 
-        Asteroid asteroid = Instantiate(_asteroidPrefab, spawnPos, rotation);
-        Debug.Log(rotation);
-        Debug.Log(spawnDir);
-        asteroid.SetTrajectory(rotation * spawnDir);
+        Asteroid asteroid = Instantiate(_asteroidPrefab[asteroidIndex], spawnPos, rotation);
+        asteroid.SetTrajectory(rotation * -spawnDir);
     }
 }
