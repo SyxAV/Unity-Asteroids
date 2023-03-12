@@ -21,7 +21,14 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Asteroid asteroid))
         {
-            asteroid.DestroySelf();
+            if (asteroid.GetIsBig())
+            {
+                asteroid.SplitSelf();
+            }
+            else
+            {
+                asteroid.DestroySelf();
+            }
             Destroy(gameObject);
         }
     }
