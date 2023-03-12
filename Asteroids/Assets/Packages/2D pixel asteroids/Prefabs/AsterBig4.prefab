@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 902199544028026708}
   - component: {fileID: 3886608385971367320}
   - component: {fileID: 7877735535130763336}
+  - component: {fileID: 3684722857767634963}
   m_Layer: 7
   m_Name: AsterBig4
   m_TagString: Untagged
@@ -119,3 +120,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &3684722857767634963
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416072628507055035}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.93

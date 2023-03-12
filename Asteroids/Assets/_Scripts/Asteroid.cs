@@ -16,4 +16,9 @@ public class Asteroid : MonoBehaviour
     {
         _rb2D.AddForce(direction * speed);
     }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
 }

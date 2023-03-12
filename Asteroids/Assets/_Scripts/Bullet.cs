@@ -16,4 +16,13 @@ public class Bullet : MonoBehaviour
     {
         _rb2D.AddForce(direction * speed);
     }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.TryGetComponent(out Asteroid asteroid))
+        {
+            asteroid.DestroySelf();
+            Destroy(gameObject);
+        }
+    }
 }
