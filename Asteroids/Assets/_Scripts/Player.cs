@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     private float _turningDir;
     private float _turningSpeed = 1f;
     private float _immuneTimer;
-    private float _immuneTimerMax = 1f;
+    private float _immuneTimerMax = .3f;
 
     void Awake()
     {
