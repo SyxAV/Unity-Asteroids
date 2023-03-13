@@ -1,10 +1,14 @@
-using System.IO.Pipes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance {get; private set;}
+
+    public static event Action OnHit; 
+
     [SerializeField] private Transform _gunBarrel;
     [SerializeField] private Bullet _bullet;
 
@@ -20,6 +24,8 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
+        Instance = this;
+
         _rb2D = GetComponent<Rigidbody2D>();
     }
 
@@ -80,6 +86,7 @@ public class Player : MonoBehaviour
         if (!_isImmune)
         {
             _lives--;
+            OnHit?.Invoke();
             _isImmune = true;
             Debug.Log(_lives);
         }
@@ -88,5 +95,10 @@ public class Player : MonoBehaviour
     public bool IsImmune()
     {
         return _isImmune;
+    }
+
+    public int GetLives()
+    {
+        return _lives;
     }
 }
