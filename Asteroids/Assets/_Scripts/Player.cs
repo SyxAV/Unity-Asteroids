@@ -88,7 +88,6 @@ public class Player : MonoBehaviour
             _lives--;
             OnHit?.Invoke();
             _isImmune = true;
-            Debug.Log(_lives);
         }
     }
 

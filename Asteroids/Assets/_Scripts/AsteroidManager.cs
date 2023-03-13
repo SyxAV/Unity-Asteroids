@@ -8,7 +8,7 @@ public class AsteroidManager : MonoBehaviour
 
     [SerializeField] private Asteroid[] _asteroidPrefab;
     [SerializeField] private Asteroid[] _smallAsteroidPrefab;
-
+    private int _smallAsteroidPointValue = 10;
     private float _spawnTime = 2f;
     private float _spawnDistance = 15f;
     private float _trajectoryVariance = 15f;
@@ -43,6 +43,7 @@ public class AsteroidManager : MonoBehaviour
         {
             Asteroid smallAsteroid = Instantiate(_smallAsteroidPrefab[asteroidIndex], asteroid.transform.position, asteroid.transform.rotation);
             smallAsteroid.SetIsBig(false);
+            smallAsteroid.SetPointValue(_smallAsteroidPointValue);
             smallAsteroid.SetTrajectory(Random.insideUnitCircle * _spawnDistance);
         }
     }

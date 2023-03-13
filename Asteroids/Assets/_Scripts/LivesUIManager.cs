@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LivesUIManager : MonoBehaviour
@@ -14,6 +16,11 @@ public class LivesUIManager : MonoBehaviour
     void OnEnable()
     {
         Player.OnHit += OnHit;
+    }
+
+    void OnDisable()
+    {
+        Player.OnHit -= OnHit;
     }
 
     void Start()
@@ -34,6 +41,7 @@ public class LivesUIManager : MonoBehaviour
             {
                 continue;
             }
+
             Destroy(child.gameObject);
         }
 

@@ -1,12 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
+    public static event Action<int> OnPointsGained;
+
     private Rigidbody2D _rb2D;
-    private float speed = 7f;
     private bool _isBig = true;
+    private int _pointValue = 20;
+    private float _speed = 7f;
 
     void Awake()
     {
@@ -35,7 +39,7 @@ public class Asteroid : MonoBehaviour
 
     public void SetTrajectory(Vector3 direction)
     {
-        _rb2D.AddForce(direction * speed);
+        _rb2D.AddForce(direction * _speed);
     }
 
     public void SplitSelf()
@@ -46,6 +50,7 @@ public class Asteroid : MonoBehaviour
 
     public void DestroySelf()
     {
+        OnPointsGained?.Invoke(_pointValue);
         Destroy(gameObject);
     }
 
@@ -57,5 +62,10 @@ public class Asteroid : MonoBehaviour
     public bool IsBig()
     {
         return _isBig;
+    }
+
+    public void SetPointValue(int pointValue)
+    {
+        _pointValue = pointValue;
     }
 }
