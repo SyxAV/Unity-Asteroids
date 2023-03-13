@@ -1,3 +1,4 @@
+using System.IO.Pipes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +9,14 @@ public class Player : MonoBehaviour
     [SerializeField] private Bullet _bullet;
 
     private Rigidbody2D _rb2D;
-    private bool _moving;
+    private bool _isMoving;
+    private bool _isImmune = false;
+    private int _lives = 3;
     private float _movingSpeed = 2.5f;
     private float _turningDir;
     private float _turningSpeed = 1f;
+    private float _immuneTimer;
+    private float _immuneTimerMax = 1f;
 
     void Awake()
     {
@@ -20,7 +25,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        _moving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+        _isMoving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
@@ -39,6 +44,16 @@ public class Player : MonoBehaviour
         {
             Shoot();
         }
+
+        if (_isImmune)
+        {
+            _immuneTimer += Time.deltaTime;
+            if (_immuneTimer >= _immuneTimerMax)
+            {
+                _isImmune = false;
+                _immuneTimer = 0;
+            }
+        }
     }
 
     private void Shoot()
@@ -49,7 +64,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (_moving)
+        if (_isMoving)
         {
             _rb2D.AddForce(transform.up * _movingSpeed);
         }
@@ -58,5 +73,20 @@ public class Player : MonoBehaviour
         {
             _rb2D.AddTorque(_turningDir * _turningSpeed);
         }
+    }
+
+    public void Hit()
+    {
+        if (!_isImmune)
+        {
+            _lives--;
+            _isImmune = true;
+            Debug.Log(_lives);
+        }
+    }
+
+    public bool IsImmune()
+    {
+        return _isImmune;
     }
 }

@@ -13,6 +13,26 @@ public class Asteroid : MonoBehaviour
         _rb2D = GetComponent<Rigidbody2D>();
     }
 
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.TryGetComponent(out Player player))
+        {
+            if (!player.IsImmune())
+            {
+                if (this._isBig)
+                {
+                    SplitSelf();
+                }
+                else
+                {
+                    DestroySelf();
+                }
+    
+                player.Hit();
+            }
+        }
+    }
+
     public void SetTrajectory(Vector3 direction)
     {
         _rb2D.AddForce(direction * speed);
@@ -21,7 +41,7 @@ public class Asteroid : MonoBehaviour
     public void SplitSelf()
     {
         AsteroidManager.Instance.SplitAsteroid(this);
-        Destroy(gameObject);
+        DestroySelf();
     }
 
     public void DestroySelf()
@@ -34,7 +54,7 @@ public class Asteroid : MonoBehaviour
         _isBig = isBig;
     }
 
-    public bool GetIsBig()
+    public bool IsBig()
     {
         return _isBig;
     }

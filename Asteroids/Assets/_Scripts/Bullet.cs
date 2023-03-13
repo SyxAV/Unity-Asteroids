@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Asteroid asteroid))
         {
-            if (asteroid.GetIsBig())
+            if (asteroid.IsBig())
             {
                 asteroid.SplitSelf();
             }
@@ -29,6 +29,7 @@ public class Bullet : MonoBehaviour
             {
                 asteroid.DestroySelf();
             }
+
             Destroy(gameObject);
         }
     }
